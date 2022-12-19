@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using WebApp_Identity.Common;
@@ -36,9 +35,14 @@ namespace WebApp_Identity.Pages.Account
                 var identity = new ClaimsIdentity(claims, AppConstant.AUTHENTICATION_SCHEME);
                 ClaimsPrincipal claimsPrincipal = new(identity);
 
+                var authProperties = new AuthenticationProperties
+                {
+                    IsPersistent = Credential.RememberMe
+                };
+
                 // Serialize ClaimsPrincipal into a string,
                 // then encrypt that string, save that as a cookie in the HttpContext.
-                await HttpContext.SignInAsync(AppConstant.AUTHENTICATION_SCHEME, claimsPrincipal);
+                await HttpContext.SignInAsync(AppConstant.AUTHENTICATION_SCHEME, claimsPrincipal, authProperties);
 
                 return RedirectToPage("/Index");
             }
@@ -50,11 +54,14 @@ namespace WebApp_Identity.Pages.Account
     public class Credential
     {
         [Required]
-        [DisplayName("User name")]
+        [Display(Name = "User name")]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [Display(Name = "Remember Me")]
+        public bool RememberMe { get; set; }
     }
 }

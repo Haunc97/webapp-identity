@@ -4,13 +4,13 @@ using WebApp_Identity.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddAuthentication(AppConstant.AUTHENTICATION_SCHEME)
     .AddCookie(AppConstant.AUTHENTICATION_SCHEME, options =>
     {
         options.Cookie.Name = AppConstant.AUTHENTICATION_SCHEME;
         options.LoginPath = "/Account/Login";
         options.AccessDeniedPath = "/Account/AccessDenied";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
     });
 
 builder.Services.AddAuthorization(options =>
