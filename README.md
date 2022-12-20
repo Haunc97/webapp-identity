@@ -11,5 +11,5 @@ This project implements some key concepts in ASP.NET Core Identity & Security
 8. Browser Session vs Authentication Ticket Lifetime
 
 Some other knowledges
-1. Roles vs Claims
-2. Razor page
+1. Razor page
+2. Partial View
