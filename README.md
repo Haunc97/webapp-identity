@@ -1,4 +1,4 @@
-ASP.NET Core Authentication & Authorization in Web App
+# ASP.NET Core Authentication & Authorization in Web App
 
 This project implements some key concepts in ASP.NET Core Identity & Security
 1. Cookie Authentication flow
